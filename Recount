@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+
+namespace Group_Assignment_4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+			string vote = "";
+			int highestvote = 0;
+			string winner = "";
+			IDictionary<string, int> candidatevotelist = new Dictionary<string, int>();
+		
+			while (vote != "***")
+            {
+				vote = Console.ReadLine();
+				if (!candidatevotelist.ContainsKey(vote))
+                {
+					candidatevotelist.Add(vote, 1);
+                }
+				else
+                {
+					candidatevotelist[vote]++;
+                }
+            }
+
+			foreach (string candidatename in candidatevotelist.Keys)
+            {
+				if (candidatevotelist[candidatename] > highestvote)
+                {
+					winner = candidatename;
+					highestvote = candidatevotelist[candidatename];
+                }
+				else if (candidatevotelist[candidatename] == highestvote)
+                {
+					winner = "Runoff!";
+                }
+            }
+			Console.WriteLine(winner);
+		}
+	}
+}
